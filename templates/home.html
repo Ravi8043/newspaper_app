@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<h1>NewsPaper app</h1>
+{% if user.is_authenticated %}
+<p>HI {{user.username}} !!</p>
+  <form action="{% url 'logout' %}" method="post" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" style="background:none;border:none;color:rgb(0, 0, 0);cursor:pointer;">
+          Logout
+      </button>
+  </form>
+<div>
+  <p>Total articles: {{ articles|length }}</p>
+  <p>
+    <a href="{% url 'create' %}">
+      +CREATE NEW ARTICLE
+    </a>
+  </p>
+  {% for article in articles %}
+  <h2>
+    <a href="{% url 'detail' article.pk %}">{{article.title}}</a>
+  </h2>
+  <p>{{article.content}}</p>
+  <h3>{{article.created_by}}</h3>
+  {% endfor %}
+</div>
+{% else %}
+<p>You are not logged in!!</p>
+<p><a href="{%url 'login' %}">Login</a></p>
+{% endif %}
+{% endblock %}

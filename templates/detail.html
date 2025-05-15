@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="{% url 'edit' article.id %}">Edit</a>
+<br>
+<a href="{% url 'delete' article.id %}">🗑 Delete</a>
+
+
+<h2>
+    title: {{article.title}}
+</h2>
+<p>
+    content: {{article.content}}
+</p>
+<h3>
+    created_by: {{article.created_by}}
+</h3>
+{% endblock %}
